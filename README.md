@@ -24,4 +24,5 @@ Example
 **If you want use more font aweome icons you should enter the unicode like this and specify the fontType, you can use Solid and brand type but Regular type has a weird behavior.**
 
 
+![alt text](https://github.com/alexenriquezc/XamForms.FontAwesomeIcon/blob/master/screenshots/1.jpg "Logo Title Text 1")
 
