@@ -2,6 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>XamForms.FontAwesomeIcon</PackageId>
+    <Authors>Alexis Enriquez</Authors>
+    <Product>XamForms.FontAwesomeIcon</Product>
+    <PackageProjectUrl>https://github.com/alexenriquezc/XamForms.FontAwesomeIcon/tree/master</PackageProjectUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>This package allows you use fontawesome in xamarin forms projects</Description>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="3.2.0.839982" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Fonts\" />
+  </ItemGroup>
 
 </Project>
