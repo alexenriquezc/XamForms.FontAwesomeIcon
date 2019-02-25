@@ -7,7 +7,8 @@
     <PackageProjectUrl>https://github.com/alexenriquezc/XamForms.FontAwesomeIcon/tree/master</PackageProjectUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>    
     <Description>This package allows you use fontawesome in xamarin forms projects.
-You should copy the files fa-brands-400.ttf, fa-regular-400.ttf, fa-solid-900.ttf from the repository to the desired platform(Android/Assets, iOS/Resources)</Description>
+You should copy the files fa-brands-400.ttf, fa-regular-400.ttf, fa-solid-900.ttf from the repository to the desired platform(Android/Assets, iOS/Resources)</Description>    
+    <Version>1.1.0</Version>
   </PropertyGroup>  
 
   <ItemGroup>

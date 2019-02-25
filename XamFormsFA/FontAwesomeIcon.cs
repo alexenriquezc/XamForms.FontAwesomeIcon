@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -8,14 +9,45 @@ namespace XamFormsFA
 {
     public class FontAwesomeIcon : Label
     {
+        #region Bindable Properties
         public static readonly BindableProperty FontTypeProperty = BindableProperty.Create(nameof(FontType), typeof(FontType), typeof(FontAwesomeIcon), FontType.Regular, BindingMode.TwoWay, null, propertyChanged: OnFontTypeChanged);
+        public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(FontAwesomeIcon), null, BindingMode.TwoWay, null, propertyChanged: OnCommandChanged);
+        public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create(nameof(CommandParameter), typeof(object), typeof(FontAwesomeIcon), null, BindingMode.TwoWay, null, propertyChanged: OnCommandParameterChanged);
+        #endregion
 
+        #region Properties
         public FontType FontType
         {
             get { return (FontType)GetValue(FontTypeProperty); }
             set { SetValue(FontTypeProperty, value); }
         }
 
+        public object CommandParameter
+        {
+            get => GetValue(CommandParameterProperty);
+            set { SetValue(CommandParameterProperty, value); }
+        }
+        #endregion
+
+        #region Ctor
+        public FontAwesomeIcon()
+        {
+            var gesture = new TapGestureRecognizer();
+            gesture.Tapped += OnTapped;
+            GestureRecognizers.Clear();
+            GestureRecognizers.Add(gesture);
+        }
+        #endregion
+
+        #region Commands
+        public ICommand Command
+        {
+            get => (ICommand)GetValue(CommandProperty);
+            set { SetValue(CommandProperty, value); }
+        }
+        #endregion
+
+        #region Methods
         static void OnFontTypeChanged(BindableObject bindable, object oldValue, object newValue)
         {
             switch (Device.RuntimePlatform)
@@ -31,9 +63,21 @@ namespace XamFormsFA
             }
         }
 
-        public FontAwesomeIcon()
+        static void OnCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
+            bindable.SetValue(CommandProperty, (ICommand)newValue);
         }
+
+        static void OnCommandParameterChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            bindable.SetValue(CommandParameterProperty, newValue);
+        }
+
+        void OnTapped(object _, EventArgs e)
+        {
+            Command?.Execute(CommandParameter);
+        }
+        #endregion        
     }
 
     [TypeConverter(typeof(FontTypeConverter))]
